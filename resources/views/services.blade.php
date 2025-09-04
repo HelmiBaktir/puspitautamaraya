@@ -150,19 +150,6 @@
             </div>
           </div>
         </div>
-        <div class="trucker__team-inner">
-          <div class="trucker__team-image">
-            <img src="assets/images/wingsbox.png" alt="Trucker - Transport Courier & Logistics Html Template">
-          </div>
-          <div class="trucker__team-info-wrapper">
-            <div class="trucker__team-text">
-              <h5 class="trucker__team-member-name">
-                <a href="#" class="trucker__fs-24 trucker__fw-700 trucker__deep-sea-blue">Wings Box</a>
-              </h5>
-              <span class="trucker__team-work-name trucker__fs-16 trucker__fw-400 trucker__gray">Beban Antara 50.000 kg</span>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </section>
