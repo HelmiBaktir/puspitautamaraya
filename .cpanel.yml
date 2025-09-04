@@ -1,0 +1,35 @@
+---
+deployment:
+  tasks:
+    # 1) Set path
+    - export REPOPATH=/home/HelmiBaktir/repositories/puspitautamaraya
+    - export DEPLOYPATH=/home/HelmiBaktir/public_html
+
+    # 2) Sinkronkan kode ke public_html (hapus file yang sudah dihapus di repo)
+    - /bin/rsync -av --delete \
+        --exclude ".git" --exclude ".cpanel.yml" \
+        --exclude "node_modules" \
+        $REPOPATH/ $DEPLOYPATH/
+
+    # 3) Masuk ke webroot dan jalankan langkah Laravel
+    - cd $DEPLOYPATH
+
+    # (opsional) turunkan site sebentar saat deploy
+    - /usr/bin/php artisan down || true
+
+    # Composer install (pastikan path composer benar di servermu; lihat catatan di bawah)
+    - /usr/bin/composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader
+
+    # Laravel housekeeping
+    - /usr/bin/php artisan storage:link || true
+    - /usr/bin/php artisan migrate --force
+    - /usr/bin/php artisan config:cache
+    - /usr/bin/php artisan route:cache
+    - /usr/bin/php artisan view:cache
+
+    # Permissions aman untuk cache & storage
+    - /usr/bin/find $DEPLOYPATH/storage -type d -exec chmod 775 {} \;
+    - /usr/bin/find $DEPLOYPATH/bootstrap/cache -type d -exec chmod 775 {} \;
+
+    # Naikkan site lagi
+    - /usr/bin/php artisan up
