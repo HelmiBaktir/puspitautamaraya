@@ -2,8 +2,8 @@
 deployment:
   tasks:
     # 1) Set path
-    - export REPOPATH=/home/HelmiBaktir/repositories/puspitautamaraya
-    - export DEPLOYPATH=/home/HelmiBaktir/public_html
+    - export REPOPATH=/home/puspitau/repositories/puspitautamaraya
+    - export DEPLOYPATH=/home/puspitau/public_html
 
     # 2) Sinkronkan kode ke public_html (hapus file yang sudah dihapus di repo)
     - /bin/rsync -av --delete \
